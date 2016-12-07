@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!--  <bean id="bnsBdrpClientFactory" class="com.baidu.driver4j.bdrp.client.BdrpClientFactory">
+          <property name="nodes" value="demo.OPENSTORAGE.all"/>
+      </bean>-->
+
+
+    <bean id="fixedIpBdrpClientFactory" class="com.baidu.driver4j.bdrp.client.BdrpClientFactory">
+        <property name="nodes" value="10.36.55.25:9000"/>
+    </bean>
+
+    <!--10.36.55.25:9000-->
+    <bean id="bnsBdrpClientFactory" class="com.baidu.driver4j.bdrp.client.BdrpClientFactory">
+        <property name="nodes" value="10.36.55.25:9000"/>
+    </bean>
+
+    <!--带健康检查bdrp-->
+    <bean id="advancedbnsBdrpClientFactory" class="com.baidu.driver4j.bdrp.client.BdrpClientFactory">
+        <property name="nodeManager">
+            <bean class="com.baidu.driver4j.bdrp.node.NodeManager">
+                <property name="nodes" value="10.36.55.25:9000"/>
+                <property name="nodeSelector">
+                    <bean class="com.baidu.driver4j.bdrp.node.selector.RoundRobbinNodeSelector"></bean>
+                </property>
+                <property name="healthCriteria">
+                    <bean class="com.baidu.driver4j.bdrp.node.health.HealthCriteria">
+                        <property name="period" value="60"></property>
+                        <property name="disableThreshold" value="5"></property>
+                        <property name="checkingFailThreshold" value="3"></property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+
+    <bean id="testService" class="com.baidu.pangu.bdrp.TestServiceImpl"></bean>
+
+    <import resource="applicationContext_1.xml"/>
+</beans>
