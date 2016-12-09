@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 /**
  * Created by yangchuanlian on 2016/7/22.
  */
-public class genProxyClass {
+public class GenProxyMain {
 
     /**
      * @param args

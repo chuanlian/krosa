@@ -3,7 +3,7 @@ package com.baidu.pangu.proxy;
 /**
  * Created by yangchuanlian on 2016/7/18.
  */
-public class App4 {
+public class ProxyMain {
 
     public static void main(String[] args) {
         staticProxy();
