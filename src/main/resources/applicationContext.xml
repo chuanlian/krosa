@@ -45,4 +45,5 @@
     <bean id="testService" class="com.baidu.pangu.bdrp.TestServiceImpl"></bean>
 
     <import resource="applicationContext_1.xml"/>
+    <import resource="applicationContext_interceptor.xml"/>
 </beans>

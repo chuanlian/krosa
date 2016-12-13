@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <bean id="userServiceImp"
+          class="com.baidu.pangu.interceptor.UserServiceImpl" />
+
+    <bean id="userInterceptor" class="com.baidu.pangu.interceptor.UserInterceptor" />
+
+    <bean id="userService"
+          class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- 代理接口 -->
+        <property name="proxyInterfaces">
+            <value>com.baidu.pangu.interceptor.UserService</value>
+        </property>
+        <!-- 目标实现类 -->
+        <property name="target">
+            <ref local="userServiceImp" />
+        </property>
+        <!-- 拦截器 -->
+        <property name="interceptorNames">
+            <list>
+                <value>userInterceptor</value>
+            </list>
+        </property>
+    </bean>
+</beans>
